@@ -1,2 +1,2 @@
 class Constants:
-    URL = "http://localhost:8000/"
+    URL = "https://atsign-ecare.herokuapp.com/"

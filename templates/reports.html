@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AtSign Ecare | Report</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- FAVICON -->
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        font-family: "Source Sans Pro", sans-serif;
+      }
+      .roboto-slab {
+        font-family: "Roboto Slab", serif;
+      }
+    </style>
+  </head>
+
+  <body class="h-screen w-full p-5">
+    <main
+      class="
+        border-2 border-yellow-500
+        h-full
+        w-full
+        flex flex-col
+        items-center
+        px-4
+        lg:px-8
+        overflow-y-auto overflow-x-hidden
+        pb-4
+      "
+    >
+      <!-- Doctor's Section -->
+      <div class="flex flex-col justify-between h-full w-full">
+        <div>
+          <div
+            class="
+              flex flex-col
+              items-center
+              border-b border-yellow-500
+              w-full
+              pb-4
+            "
+          >
+            <h1 class="text-3xl lg:text-5xl text-yellow-500 roboto-slab mt-5">
+              {{hospital_name}}
+            </h1>
+            <div>
+              <p class="text-xl lg:text-3xl text-gray-400 mt-3 lg:mt-6">
+                {{doctor_name}}
+                <span class="text-sm lg:text-base text-gray-400"
+                  >{{doctor_degree}}</span
+                >
+              </p>
+            </div>
+            <span class="text-xs lg:text-sm text-gray-400 mt-5">
+              {{doctor_address}}
+            </span>
+
+            <span class="text-xs lg:text-sm text-gray-400">
+              {{doctor_number}}
+            </span>
+          </div>
+          <!-- Patient's section -->
+          <div class="flex flex-col w-full">
+            <div class="px-3 flex flex-row pt-4">
+              <div class="w-7/12">
+                <p class="text-sm text-gray-400">
+                  P. Name :
+                  <span class="text-sm text-black">{{patient_name}}</span>
+                </p>
+              </div>
+              <div class="w-5/12 pl-4">
+                <p class="text-sm text-gray-400">
+                  Age :
+                  <span class="text-sm text-black">{{patient_age}}</span>
+                </p>
+              </div>
+            </div>
+            <div class="px-3 flex flex-row">
+              <div class="w-7/12">
+                <p class="text-sm text-gray-400">
+                  Date :
+                  <span class="text-sm text-black">{{date}}</span>
+                </p>
+              </div>
+              <div class="w-5/12 pl-4">
+                <p class="text-sm text-gray-400">
+                  Gender :
+                  <span class="text-sm text-black">{{patient_gender}}</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Doctor's Prescription -->
+            <div class="flex flex-col space-y-2 w-full py-6">
+              <p class="text-5xl">R<span class="text-2xl">x</span></p>
+              {% for data in content %}
+              <p style="margin: 0px">{{data}}</p>
+              {% endfor %}
+            </div>
+
+            <!-- Medicines List -->
+            {% if tests|length > 0 %}
+            <div class="flex flex-col space-y-2 w-full">
+              <p class="text-xl font-bold">Medicines</p>
+              <div>
+                <table class="w-full table-auto">
+                  <thead class="justify-between">
+                    <tr class="bg-gray-800">
+                      <th class="py-2">
+                        <span class="text-gray-300">Name</span>
+                      </th>
+                      <th class="py-2">
+                        <span class="text-gray-300">Time</span>
+                      </th>
+                      <th class="py-2">
+                        <span class="text-gray-300">Interval</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-gray-200">
+                    {% for data in medicines %}
+                    <tr class="bg-white border-4 border-gray-200">
+                      <td class="py-2 text-center border-r">
+                        <span class="text-center font-semibold"
+                          >{{data.name}}</span
+                        >
+                      </td>
+
+                      <td class="py-2 text-center border-r">
+                        <span>{{data.time}}</span>
+                      </td>
+                      <td class="py-2 text-center border-r">
+                        <span>{{data.interval}}</span>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
+
+              <!-- Suggested Tests -->
+              {% if tests|length > 0 %}
+              <div class="flex flex-col space-y-2 w-full py-6">
+                <p class="text-xl font-bold">Tests</p>
+
+                {% for data in tests %}
+                <li style="margin: 0px">{{data}}</li>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="w-full border-t border-yellow-500 text-center">
+          <span class="text-sm pt-1 text-gray-400"> {{doctor_email}} </span>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
